@@ -1,0 +1,38 @@
+1. Core Lab
+2. FIOS Lab:
+3. Devices Lab
+
+3 users
+
+1. Device admin - Wider access
+2. Executive - Narrow access
+3. Certifiction users - Widest access
+
+Network based IPSIDS
+Host bases IPSIDS
+
+Infra required for core app for FIOS Lab:
+
+2 Dev machines: EC2 instance
+1 Tester EC2 machines:
+    pycharm and other testing tools
+1 App EC2 instance : 50 GB
+1 DB EC2 instance: 100 GB (MySQL)
+    1 Device Inventory schema
+    1 App Schema
+Amazon Email Service
+
+Manasa (Manager), Mahesh and Chandana  - 
+
+Ansible for first phase:
+
+Interact from AWS to connect to remote Router devices in Infinite network
+To segregate the developer, testing and internal groups to create subnets. Multiple subnets in AWS for different groups users, application and internal. Separate subnet for device interaction. Need inbound and outbound rules for different VPCs
+Perform SNMP walk (pysnmp):
+    To walk through all hardwares and get the current config
+Developer EC2 - Ubuntu 22.04 - Quibics to make it light weight
+Test API calls to AWS email services
+Test API calls to AWS DB
+Configure Ansible to connect to custom port
+
+EC2 or AWS Git Repo

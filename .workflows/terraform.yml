@@ -1,0 +1,48 @@
+Name: Terraform Workflow
+SchemaVersion: 1.0
+
+Triggers:
+  - Type: Push
+    Branches:
+      - main
+
+Actions:
+  TerraformInit:
+    Identifier: aws/build@v1
+    Inputs:
+      Steps:
+        - Run: |
+            cd environments/dev
+            terraform init
+    Environment:
+      Connections:
+        - Role: TerraformRole
+          Name: AWS
+
+  TerraformPlan:
+    Identifier: aws/build@v1
+    Inputs:
+      Steps:
+        - Run: |
+            cd environments/dev
+            terraform plan -out=tfplan
+    Environment:
+      Connections:
+        - Role: TerraformRole
+          Name: AWS
+    DependsOn:
+      - TerraformInit
+
+  TerraformApply:
+    Identifier: aws/build@v1
+    Inputs:
+      Steps:
+        - Run: |
+            cd environments/dev
+            terraform apply -auto-approve tfplan
+    Environment:
+      Connections:
+        - Role: TerraformRole
+          Name: AWS
+    DependsOn:
+      - TerraformPlan 
